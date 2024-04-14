@@ -5,7 +5,7 @@ spring:
     show-sql: true
     properties:
       hibernate:
-        ddl-auto: create
+        ddl-auto: update
         format_sql: true
   datasource:
     url: jdbc:postgresql://localhost:6432/users_db
@@ -16,6 +16,12 @@ spring:
     user: document_user
     password: secret
     change-log: classpath:db/changelog/db-init.yaml
+
+jwt:
+  access:
+    expiration: 30
+  refresh:
+    expiration: 60
 
 logging:
   pattern:

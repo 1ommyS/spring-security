@@ -17,20 +17,20 @@ public class SsgApplication {
 
     @Bean
     CommandLineRunner commandLineRunner(
-            UserRepository repository,
+            RoleRepository repository,
             PasswordEncoder encoder
     ) {
 
         return args -> {
-            var user = repository.findById(1);
+            var role = repository.findByName("ROLE_USER");
+            if (role.isEmpty()) {
+                var newRole = Role.builder()
+                        .name("ROLE_USER")
+                        .build();
 
-            if (user.isEmpty()) {
-                var newUser = new User();
-                newUser.setLogin("admin");
-                newUser.setPassword(encoder.encode("qwerty"));
-
-                repository.save(newUser);
+                repository.save(newRole);
             }
+
         };
     }
 }
